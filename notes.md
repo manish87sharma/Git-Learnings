@@ -103,5 +103,33 @@ git config --local core.autocrlf false
   > git rm <file>
   # to rename file
   > git mv <file>
+ # directly commit without putting in staging area
+ > git commit -am "without intermediate step"
+  ```
 
+  ### allows you to stage commits in hunks,interactively
+  ```console
+  > git add -p
+  y - stage this hunk
+  n - do not stage this hunk
+  q - quit; do not stage this hunk or any of the remaining ones
+  a - stage this hunk and all later hunks in the file
+  d - do not stage this hunk or any of the later hunks in the file
+  s - split the current hunk into smaller hunks
+  e - manually edit the current hunk
+  ? - print help
+  ```
+ ### git stash
+ - to save uncommitted work like switching between branches
+  ```console
+  # add things to stash
+  > git stash
+  # list stash
+  > git stash list
+  # show the contents
+  > git stash show stash@{0}
+  # apply the last stash
+  > git stash apply
+  # apply a specific stash
+  > git stash apply stash@{0}
   ```
