@@ -121,6 +121,7 @@ git config --local core.autocrlf false
   ```
  ### git stash
  - to save uncommitted work like switching between branches
+ - by default, git only stashes changes and file that are already **tracked** 
   ```console
   # add things to stash
   > git stash
@@ -132,4 +133,79 @@ git config --local core.autocrlf false
   > git stash apply
   # apply a specific stash
   > git stash apply stash@{0}
+  # keep un tracked files
+  > git stash --include-untracked
+  # keep all files (even ignored ones!)
+  > git stash --all
+  # name stashes for easy reference
+  > git stash save "WIP: making some progress for new feature"
+  # start a new branch from stash
+  > git stash branch <optional stash name>
+  # grab a single file from stash
+  # use with caution, same filename in stage will be overwrite by this command
+  > git checkout <stash name> -- <filename> 
+  ```
+ ### cleaning the stash
+ - all stash information will be saved in .git/refs/stash file
+  
+ ```console
+ # remove the last stash and applying changes
+ # does not remove if there is any merge conflict
+ > git stash pop
+ # remove the last stash
+ > git stash drop  
+ # remove the nth stash 
+ > git stash drop stash@{n}
+ # remove all stashes
+ > git stash clear
+ ```
+ ### git file diff
+ ```console
+ > git diff <filename>
+ ```
+
+ ### References are pointer to commits,and there are 3 types of references
+  - Tags and Annotated Tags
+  - Branches
+  - HEAD
+
+ ### Branch
+ - A branch is just a pointer to a particular commit
+ - New commits are made pointer will also change. 
+
+### Head
+- How git knows what branch you are currently on,
+- It is symbolic link to the branch that your currently working
+- it is pointer
+  - It usually point at the name of the current branch
+  - But, it can point to a commit too (detached HEAD)
+- It moves when
+  - you make a commit in the currently active branch
+  - When you checkout a new branch
+  
+### LIGHTWEIGHT TAGS
+- Lightweight tags are just a simple pointer to a commit
+- When you create a tag with no arguments, it captures the value
+in HEAD
+
+```console
+> git checkout master
+> git tag my-first-commit
+```
+### ANNOTATED TAGS: GIT TAG -A
+- Point to a commit, but store additional information
+- Author, message, date
+  ```console
+  # create annotated tag
+  > git tag -a v1.0 -m 'version 1 from my blog'
+  # List all the tags in a repo
+  > git tag
+  # List all tags, and what commit they’re pointing to
+  > git	show-ref	--tags
+  # Looking at the tag, or tagged contents:
+  > git	tag	--points-at	<commit>	
+  # Looking at the tag, or tagged contents:
+  > git	show	<tag-name>
+
+
   ```
