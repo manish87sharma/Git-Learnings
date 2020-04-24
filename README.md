@@ -122,11 +122,8 @@ git config --local core.autocrlf false
   > git rm <file>
   # to rename file
   > git mv <file>
-  >
-  >
-# directly commit without putting in staging area
-
- > git commit -am "without intermediate step"
+  # directly commit without putting in staging area
+  > git commit -am "without intermediate step"
   ```
 
 ### allows you to stage commits in hunks,interactively
@@ -190,7 +187,7 @@ git config --local core.autocrlf false
 
 ### git file diff
 
- ```bash
+ ``` bash
  > git diff <filename>
  ```
 
@@ -221,6 +218,7 @@ git config --local core.autocrlf false
 - Lightweight tags are just a simple pointer to a commit
 - When you create a tag with no arguments, it captures the value
 in HEAD
+- This kind of tags are not in practice
 
 ```bash
 > git checkout master
@@ -243,6 +241,34 @@ in HEAD
   > git tag --points-at <commit>
   # Looking at the tag, or tagged contents:
   > git show <tag-name>
+  ```
 
+### Tag
 
+- It’s a snapshot!
+- The commit that a tag points doesn’t change
+
+### Branch
+
+- The current branch pointer moves with every commit to the
+  repository
+
+### HEAD-LESS / DETACHED HEAD
+
+- Sometimes you need to checkout a specific commit (or tag)
+  instead of a branch.
+- git moves the HEAD pointer to that commit
+- as soon as you checkout a different branch or commit, the value
+  of HEAD will point to the new SHA
+- There is no reference pointing to the commits you made in a
+  detached state
+
+### Save your work
+
+    - Create a new branch that points to the last commit you made in a detached state. 
+    - Why the last commit?
+        - Because the other commits point to their parents     
+
+  ```bash
+    > git branch <name> <commit>
   ```
