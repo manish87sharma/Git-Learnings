@@ -16,6 +16,8 @@
 ```bash
 echo 'Hello' | git hash-object --stdin
 echo 'blob 5\0Hello' | openssl sha1
+printf 'blob 5\0hello' > test.txt
+openssl sha1 test.txt
 ```
 
 **.git** directory contains all of the data about the repository.
@@ -272,3 +274,38 @@ in HEAD
   ```bash
     > git branch <name> <commit>
   ```
+
+### Git Merge
+
+- To merge one branch to another
+- Fast forward
+  - No commit is created for merging
+  - Fast forward happens when there are no commits on base branch that occurred after the new branch was created.
+
+```bash
+# fast forward merge
+> git merge <branch name>
+# To retain the history of a merge commit, even if there are no changes to the base branch:
+# This will force a merge commit, even when one isn’t necessary
+> git merge <branch name> --no-ff
+```
+
+### GIT RERERE - REUSE RECORDED RESOLUTION
+
+git saves how you resolved a conflict
+
+- next conflict: reuse the same resolution
+- useful for:
+  - long lived feature branch (like a refactor)
+  - rebasing
+
+```bash
+> git config rerere.enabled true
+# diff
+> git rerere diff
+# log graph
+> git log --graph
+# reset to head
+> git reset --hard HEAD^
+
+```
